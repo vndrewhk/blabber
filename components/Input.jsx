@@ -6,17 +6,27 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import React, { useState, useRef } from "react";
-import EmojiPicker from "./EmojiPicker";
-
+// import EmojiPicker from "./EmojiPicker";
 function Input() {
   const [input, SetInput] = useState("");
-  const [file, setFile] = useState(
-    "https://c.tenor.com/IVQgkTbHZhYAAAAd/spinning-monkey-spinning-ape.gif"
-  );
+  const [file, setFile] = useState();
+  // "https://c.tenor.com/IVQgkTbHZhYAAAAd/spinning-monkey-spinning-ape.gif"
   const [showEmojis, setShowEmojis] = useState(false);
   const filePickerRef = useRef(null);
 
-  const addImage = () => {};
+  const addImage = (e) => {
+    //   read doc on filereader
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+      //   const f = e.target.files[0];
+      //   setFile(f);
+    }
+    reader.onload = (readerEvent) => {
+      setFile(readerEvent.target.result);
+    };
+    e.target.value = "";
+  };
 
   const handleInput = (e) => {
     SetInput(e.target.value);
@@ -25,6 +35,16 @@ function Input() {
 
   const deleteImage = () => {
     setFile(null);
+  };
+  //   const addEmoji = (e) => {
+  //     let sym = e.unified.split("-");
+  //     let codesArray = [];
+  //     sym.forEach((el) => codesArray.push("0x" + el));
+  //     let emoji = String.fromCodePoint(...codesArray);
+  //     setInput(input + emoji);
+  //   };
+  const sendPost = (obj) => {
+    console.log("sent");
   };
 
   return (
@@ -39,7 +59,7 @@ function Input() {
       ></img>
       {/* divide-y makes a border btween each of the children, so that you dont have to manually add the borders to each element */}
       <div className="w-full divide-y divide-gray-700 ">
-        <div>
+        <div className={`${file && "pb-7"}`}>
           <textarea
             // onChange={handleInput}
             onChange={(e) => handleInput(e)}
@@ -74,7 +94,7 @@ function Input() {
           </div>
         </div>
         <div className="flex items-end">
-          <div className="flex items-center pt-2.5">
+          <div className="flex items-center pt-2.5 relative">
             {/* onclick means that when u click, it goes to the filepicker ref and does the click action */}
             <div
               className="iconDiv"
@@ -85,7 +105,7 @@ function Input() {
                 type="file"
                 hidden
                 onClick={() => console.log("clicked")}
-                onChange={addImage}
+                onChange={(e) => addImage(e)}
                 ref={filePickerRef}
               ></input>
             </div>
@@ -98,12 +118,30 @@ function Input() {
             <div className="iconDiv">
               <CalendarIcon className="icon"></CalendarIcon>
             </div>
+            {/* {showEmojis && (
+              <EmojiPicker
+                // onSelect={addEmoji}
+                // style={{
+                //   position: "absolute",
+                //   marginTop: "465px",
+                //   marginLeft: -40,
+                //   maxWidth: "320px",
+                //   borderRadius: "20px",
+                // }}
+                className="absolute mt-[465px] -ml-[40px] max-w-[320px] rounded-[20px]"
+                theme="dark"
+              />
+            )} */}
           </div>
-          <button className=" xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full h-8 w-20  font-bold shadow-md hover:bg-[#1a8cd8]">
+          <button
+            className=" xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full h-8 w-20  font-bold shadow-md hover:bg-[#1a8cd8] disabled:cursor-default disabled:opacity-50"
+            // if theres no input and theres no file
+            disabled={!input.trim() && !file}
+            // onClick = {sendPost}
+          >
             Tweet
           </button>
         </div>
-        {showEmojis && <EmojiPicker/>}
       </div>
     </div>
   );
