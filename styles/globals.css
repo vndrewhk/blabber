@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* layers */
+/* https://tailwindcss.com/docs/adding-custom-styles */
+
+@layer base {
+  /* replaces body and main stuff */
+  body {
+    @apply bg-black;
+  }
+}
+
+@layer components {
+  .hoverAnimation {
+    @apply hover:bg-[#d9d9d9] hover:bg-opacity-10 cursor-pointer rounded-full w-[52px] h-[52px] xl:w-auto xl:h-auto xl:py-3 xl:px-4 transition duration-200 ease-out;
+  }
+  .icon {
+    @apply h-[22px]  text-[#1d9bf0];
+  }
+
+  .iconDiv {
+    @apply w-9 h-9 cursor-pointer hover:bg-[#1d9bf0] hover:bg-opacity-10 flex items-center rounded-full transition ease-out justify-center; 
+  }
+}
+/* html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+} */
