@@ -12,8 +12,11 @@ import {
   DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 function Sidebar() {
+  const { data: session } = useSession();
   return (
     // we want to keep sidebar fixed because we dont want it to scroll when we scroll the feed through
 
@@ -53,16 +56,20 @@ function Sidebar() {
         Tweet
       </button>
       {/* flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24 */}
-      <div className="text-[#d9d9d9] flex items-center ml:auto mt-auto hoverAnimation xl:ml-auto justify-between xl:w-56 xl:h-[52px]  ">
+
+      <div
+        onClick={() => signOut()}
+        className="text-[#d9d9d9] flex items-center ml:auto mt-auto hoverAnimation xl:ml-auto justify-between xl:w-56 xl:h-[52px]  "
+      >
         <div className="flex">
           <img
-            src="https://yt3.ggpht.com/yti/APfAmoFHPde2CwUNNaO_M9u1NRXkAaRnGi9smtU63HABgw=s88-c-k-c0x00ffffff-no-rj-mo"
+            src={session.user.image}
             alt="Profile Picture"
             className="w-10 h-10 rounded-full ml-[5px] xl:ml-[2.5px] xl:mr-5"
           ></img>
           <div className="hidden xl:inline leading-5">
-            <h4 className="text-white font-bold">Text</h4>
-            <p className="text-gray-500">@Text2</p>
+            <h4 className="text-white font-bold">{session.user.name}</h4>
+            <p className="text-gray-500">{session.user.email}</p>
           </div>
         </div>
         <DotsHorizontalIcon className="h-5 hidden xl:inline self-center ml-10 text-white"></DotsHorizontalIcon>

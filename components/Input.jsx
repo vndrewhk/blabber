@@ -16,8 +16,10 @@ import {
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import React, { useState, useRef } from "react";
 import { db, storage } from "../firebase";
+import { useSession } from "next-auth/react";
 // import EmojiPicker from "./EmojiPicker";
 function Input() {
+  const { data: session } = useSession();
   const [input, SetInput] = useState("");
   const [file, setFile] = useState();
   const [loading, setLoading] = useState(false);
@@ -54,10 +56,10 @@ function Input() {
     // adds a document to our collection (db)
     // https://firebase.google.com/docs/firestore/manage-data/add-data
     const docRef = await addDoc(collection(db, "posts"), {
-      //   id: session.user.uid,
-      //   username: session.user.name,
-      //   userImg: session.user.image,
-      //   tag: session.user.tag,
+      id: session.user.uid || null,
+      username: session.user.name || null,
+      userImg: session.user.image || null,
+      email: session.user.email || null,
       text: input,
       timestamp: serverTimestamp(),
     });
@@ -96,7 +98,7 @@ function Input() {
       className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll`}
     >
       <img
-        src="https://yt3.ggpht.com/yti/APfAmoFHPde2CwUNNaO_M9u1NRXkAaRnGi9smtU63HABgw=s88-c-k-c0x00ffffff-no-rj-mo"
+        src={session.user.image}
         alt="Profile Picture"
         className="w-11 h-11 rounded-full cursor-pointer"
       ></img>

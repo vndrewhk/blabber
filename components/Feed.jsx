@@ -1,6 +1,7 @@
 import { SparklesIcon } from "@heroicons/react/outline";
 import React from "react";
 import Input from "./Input";
+import Posts from "./Posts";
 
 function Feed() {
   return (
@@ -18,6 +19,7 @@ function Feed() {
       </div>
 
       <Input></Input>
+      <Posts></Posts>
     </div>
   );
 }

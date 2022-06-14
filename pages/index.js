@@ -4,8 +4,18 @@ import Feed from "../components/Feed";
 import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widgets";
 import styles from "../styles/Home.module.css";
+import { useSession, getProviders, getSession } from "next-auth/react";
+import Login from "../components/Login";
 
-export default function Home() {
+export default function Home({ trendingResults, followResults, providers }) {
+  // we will use a hook to get the session
+
+  const { data: session } = useSession();
+  
+  if (!session) {
+    return <Login providers={providers} />;
+  }
+
   return (
     <div>
       <Head>
@@ -14,11 +24,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex bg-black min-h-screen max-w-[1500px]  mx-auto">
-      {/* <main> */}
-      {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
+        {/* <main> */}
+        {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
         <Sidebar></Sidebar>
         {/* Sidebar */}
-       <Feed></Feed>
+        <Feed></Feed>
         {/* Feed */}
         <Widgets></Widgets>
         {/* Widgets */}
@@ -27,4 +37,48 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  let data = {};
+  try {
+    const trendingData = await fetch("https://jsonkeeper.com/b/NKEV");
+    // assume it will always work
+    if (trendingData.ok) {
+      const trendingResults = await trendingData.json();
+      data = { ...data, trendingResults };
+    }
+  } catch {}
+  try {
+    const followData = await fetch("https://jsonkeeper.com/b/WWMJ");
+    // assume it will always work
+    if (followData.ok) {
+      const followResults = await followData.json();
+      data = { ...data, followResults };
+    }
+  } catch {}
+  const providers = await getProviders();
+  const session = await getSession(context);
+  data = { ...data, providers, session };
+
+  return {
+    props: data,
+  };
+
+  // const trendingResults = await fetch("https://jsonkeeper.com/b/NKEV").then(
+  //   (res) => res.json()
+  // );
+  // const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
+  //   (res) => res.json()
+  // );
+  // const providers = await getProviders();
+  // const session = await getSession(context);
+
+  // return {
+  //   props: {
+  //     trendingResults,
+  //     followResults,
+  //     providers,
+  //     session,
+  //   },
 }
