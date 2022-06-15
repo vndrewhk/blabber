@@ -11,9 +11,15 @@ const modalSlice = createSlice({
     toggleModal: (state) => {
       state.modalStatus = !state.modalStatus;
     },
+    modalTrue: (state) => {
+      state.modalStatus = true;
+    },
+    modalFalse: (state) => {
+      state.modalStatus = false;
+    },
   },
 });
 
-export const { toggleModal } = modalSlice.actions;
+export const { toggleModal, modalTrue, modalFalse } = modalSlice.actions;
 
 export default modalSlice.reducer;

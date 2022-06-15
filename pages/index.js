@@ -6,12 +6,13 @@ import Widgets from "../components/Widgets";
 import styles from "../styles/Home.module.css";
 import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
+import Modal from "../components/Modal";
 
 export default function Home({ trendingResults, followResults, providers }) {
   // we will use a hook to get the session
 
   const { data: session } = useSession();
-  
+
   if (!session) {
     return <Login providers={providers} />;
   }
@@ -32,6 +33,7 @@ export default function Home({ trendingResults, followResults, providers }) {
         {/* Feed */}
         <Widgets></Widgets>
         {/* Widgets */}
+        <Modal></Modal>
 
         {/* Modal <- Redux/recoil */}
       </main>

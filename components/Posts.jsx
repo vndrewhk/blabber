@@ -40,6 +40,7 @@ function Posts() {
                   post["_document"].data.value.mapValue.fields.timestamp
                     .timestampValue
                 }
+                id={post.id}
               ></Post>
             );
           })}{" "}
