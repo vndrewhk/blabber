@@ -23,7 +23,7 @@ import {
 import { db } from "../firebase";
 import { ArrowLeftIcon } from "@heroicons/react/solid";
 import Post from "../components/Post";
-const id = ({ trendingResults, followResults, providers }) => {
+const Id = ({ trendingResults, followResults, providers }) => {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
@@ -111,7 +111,7 @@ const id = ({ trendingResults, followResults, providers }) => {
   );
 };
 
-export default id;
+export default Id;
 export async function getServerSideProps(context) {
   let data = {};
   try {
