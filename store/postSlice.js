@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  postId: "",
+  postId:""
 };
 
 const postSlice = createSlice({

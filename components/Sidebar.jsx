@@ -14,9 +14,11 @@ import {
 } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function Sidebar() {
   const { data: session } = useSession();
+  const router = useRouter();
   return (
     // we want to keep sidebar fixed because we dont want it to scroll when we scroll the feed through
 
@@ -27,6 +29,9 @@ function Sidebar() {
           alt="twitter-logo"
           width={30}
           height={30}
+          onClick={() => {
+            router.push("/");
+          }}
         ></Image>
       </div>
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
@@ -63,13 +68,13 @@ function Sidebar() {
       >
         <div className="flex">
           <img
-            src={session.user.image}
+            src={session?.user.image}
             alt="Profile Picture"
             className="w-10 h-10 rounded-full ml-[5px] xl:ml-[2.5px] xl:mr-5"
           ></img>
           <div className="hidden xl:inline leading-5">
-            <h4 className="text-white font-bold">{session.user.name}</h4>
-            <p className="text-gray-500">{session.user.email}</p>
+            <h4 className="text-white font-bold">{session?.user.name}</h4>
+            <p className="text-gray-500">{session?.user.email}</p>
           </div>
         </div>
         <DotsHorizontalIcon className="h-5 hidden xl:inline self-center ml-10 text-white"></DotsHorizontalIcon>

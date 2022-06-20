@@ -48,7 +48,7 @@ function Post({ postInfo, id }) {
     dispatch(modalTrue());
   };
 
-  const postIdChange = (id) => {
+  const postIdChange = () => {
     dispatch(setPostId(id));
   };
 
@@ -61,25 +61,42 @@ function Post({ postInfo, id }) {
     [db, id]
   );
 
-  //   checks if the current user is one of the users taht liked the post
   useEffect(() => {
-    setLiked(
-      likes.map((like) => {
-        if (like.email === session?.user?.email) {
-          return true;
+    if (id) {
+      const unsubscribe = onSnapshot(
+        query(
+          collection(db, "posts", id, "comments"),
+          orderBy("timestamp", "desc")
+        ),
+        (snapshot) => {
+          setComments(snapshot.docs);
+          console.log(snapshot.docs);
         }
-      })
-    );
-    // console.log("hi");
-    // console.log(
-    //   likes.findIndex((like) => {
-    //     // console.log(like.data().email);
-    //     // console.log(session?.user?.email);
-    //     // console.log((like.email === session?.user.email) !== -1);
-    //     like.email == session?.user?.email;
-    //   })
-    // );
-  }, [likes]);
+      );
+      return () => unsubscribe();
+    }
+  }, [db]);
+
+  //   checks if the current user is one of the users taht liked the post
+  //   useEffect(() => {
+  //     console.log(likes);
+  //     console.log(liked);
+
+  //     setLiked(
+  //       likes.findIndex((like) => {
+  //         console.log(like.data());
+  //         console.log(like.id);
+  //         console.log(session?.user?.email);
+  //         console.log((like.id === session?.user?.email) !== -1);
+  //         // returns whether ot not iw as not found
+  //         // if -1, not found
+  //         // if >-1, found
+  //         return (like.id === session?.user?.uid) > -1;
+  //       })
+  //     );
+  //     console.log(liked);
+
+  //   }, [likes]);
 
   const likePost = async () => {
     if (liked) {
@@ -93,8 +110,34 @@ function Post({ postInfo, id }) {
     }
   };
 
+  //   const likePost = async () => {
+  //     if (liked) {
+  //       await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
+  //     } else {
+  //       await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
+  //         email: session.user.email,
+  //       });
+  //     }
+  //   };
+
   //   console.log(postInfo);
-  //   console.log(id);
+  // console.log(id);
+
+  useEffect(
+    () =>
+      setLiked(
+        likes.findIndex((like) => like.id === session?.user?.uid) !== -1
+      ),
+
+    //why does return not work here?
+    // its because findindex already returns something, you just need to check if that returns is !==-1
+    // setLiked(
+    //   likes.findIndex((like) => {
+    //     return (like.id === session?.user?.uid) !== -1;
+    //   })
+    // ),
+    [likes]
+  );
 
   return (
     <div
@@ -172,7 +215,7 @@ function Post({ postInfo, id }) {
               //   setPostId(id);
               //   setIsOpen(true);
               modalChange();
-              postIdChange(id);
+              postIdChange();
               //   console.log("hi");
             }}
           >
