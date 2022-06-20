@@ -8,6 +8,7 @@ import styles from "../styles/Home.module.css";
 import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
+import Comment from "../components/Comment";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -20,7 +21,9 @@ import {
   orderBy,
 } from "@firebase/firestore";
 import { db } from "../firebase";
-const id = () => {
+import { ArrowLeftIcon } from "@heroicons/react/solid";
+import Post from "../components/Post";
+const id = ({ trendingResults, followResults, providers }) => {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
@@ -71,8 +74,35 @@ const id = () => {
         {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
         <Sidebar></Sidebar>
         {/* Sidebar */}
-        <span className="text-white"> text {id}</span>s{/* Feed */}
-        <Widgets></Widgets>
+        <div className="flex flex-grow border-l border-r border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px] flex-col">
+          <div className="flex px-1.5 py-2 border-b border-gray-700 text-[#d9d9d9] font-semibold text-xl gap-4 sticky top-0 z-50 bg-black">
+            <div className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0">
+              <ArrowLeftIcon
+                className="text-white h-5 cursor-pointer"
+                onClick={() => router.push("/")}
+              ></ArrowLeftIcon>
+            </div>
+            Blab
+            {/* <span className="text-white"> text {id}</span> */}
+          </div>
+          {/* <span>test</span> */}
+          <Post id={id} postInfo={post} postPage />
+          {comments.length > 0 && (
+            <div className="pb-72">
+              {comments.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  id={comment.id}
+                  comment={comment.data()}
+                ></Comment>
+              ))}
+            </div>
+          )}
+        </div>
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        ></Widgets>
         {/* Widgets */}
         <Modal></Modal>
         {/* Modal <- Redux/recoil */}

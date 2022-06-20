@@ -27,7 +27,7 @@ function Posts() {
   return (
     <>
       {posts.length === 0 && <h1 className="text-white">Loading</h1>}
-      <button onClick={checkPosts}>clck here</button>{" "}
+      {/* <button onClick={checkPosts}>clck here</button>{" "} */}
       <div className="pb-72">
         {posts.length > 0 &&
           posts.map((post) => {

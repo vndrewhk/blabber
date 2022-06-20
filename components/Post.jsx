@@ -32,14 +32,13 @@ import { db } from "../firebase";
 import { modalTrue, toggleModal } from "../store/modalSlice";
 import { setPostId } from "../store/postSlice";
 
-function Post({ postInfo, id }) {
+function Post({ postInfo, id, postPage }) {
+  const modalState = useSelector((state) => state.modal);
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(modalState);
   const [comments, setComments] = useState([]);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState([]);
-  const postPage = false;
-  const modalState = useSelector((state) => state.modal);
 
   const dispatch = useDispatch();
   const router = useRouter();
