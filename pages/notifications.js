@@ -7,15 +7,20 @@ import styles from "../styles/Home.module.css";
 import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
+import NotificationFeed from "../components/NotificationFeed";
 
-export default function Home({ trendingResults, followResults, providers }) {
+export default function notifications({
+  trendingResults,
+  followResults,
+  providers,
+}) {
   // we will use a hook to get the session
 
   const { data: session } = useSession();
 
-  if (!session) {
-    return <Login providers={providers} />;
-  }
+  // if (!session) {
+  //   return <Login providers={providers} />;
+  // }
 
   return (
     <div>
@@ -29,8 +34,7 @@ export default function Home({ trendingResults, followResults, providers }) {
         {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
         <Sidebar></Sidebar>
         {/* Sidebar */}
-        <Feed page={"Home"} input={true}></Feed>
-        {/* Feed */}
+        <NotificationFeed></NotificationFeed> {/* Feed */}
         <Widgets
           trendingResults={trendingResults}
           followResults={followResults}

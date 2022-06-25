@@ -99,12 +99,12 @@ function Post({ postInfo, id, postPage }) {
 
   const likePost = async () => {
     if (liked) {
-      await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
+      await deleteDoc(doc(db, "posts", id, "likes", session?.user.uid));
       //                 deleteDoc(doc(db, "posts", id));
       setLiked(false);
     } else {
-      await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
-        email: session.user.email,
+      await setDoc(doc(db, "posts", id, "likes", session?.user.uid), {
+        email: session?.user.email,
       });
     }
   };
@@ -228,7 +228,7 @@ function Post({ postInfo, id, postPage }) {
             )}
           </div>
 
-          {session.user.uid === postInfo?.id ? (
+          {session?.user.uid === postInfo?.id ? (
             <div
               className="flex items-center space-x-1 group"
               onClick={(e) => {

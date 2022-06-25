@@ -98,7 +98,7 @@ function Input() {
       className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll`}
     >
       <img
-        src={session.user.image}
+        src={session?.user.image}
         alt="Profile Picture"
         className="w-11 h-11 rounded-full cursor-pointer"
       ></img>

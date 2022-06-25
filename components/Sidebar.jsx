@@ -19,6 +19,16 @@ import { useRouter } from "next/router";
 function Sidebar() {
   const { data: session } = useSession();
   const router = useRouter();
+  // const emailTrim = (email) => {
+  //   let newEmail = "";
+  //   for (let i = 0; i < email.length; i++) {
+  //     if (email[i] == "@") {
+  //       break;
+  //     }
+  //     newEmail += email[i];
+  //   }
+  //   return newEmail;
+  // };
   return (
     // we want to keep sidebar fixed because we dont want it to scroll when we scroll the feed through
 
@@ -36,7 +46,7 @@ function Sidebar() {
       </div>
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
         <SidebarLink text="Home" Icon={HomeIcon} active routeTo="/" />
-        <SidebarLink text="Explore" Icon={HashtagIcon} routeTo="/explore" />
+        {/* <SidebarLink text="Explore" Icon={HashtagIcon} routeTo="/explore" /> */}
         <SidebarLink
           text="Notifications"
           Icon={BellIcon}
@@ -48,13 +58,13 @@ function Sidebar() {
           Icon={BookmarkIcon}
           routeTo="/bookmarks"
         />
-        <SidebarLink text="Lists" Icon={ClipboardListIcon} routeTo="/lists" />
+        {/* <SidebarLink text="Lists" Icon={ClipboardListIcon} routeTo="/lists" /> */}
         <SidebarLink text="Profile" Icon={UserIcon} routeTo="/profile" />
-        <SidebarLink
+        {/* <SidebarLink
           text="More"
           Icon={DotsCircleHorizontalIcon}
           routeTo="/more"
-        />
+        /> */}
       </div>
       {/* w-56 h-[52px] */}
       <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px]  text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
@@ -74,7 +84,9 @@ function Sidebar() {
           ></img>
           <div className="hidden xl:inline leading-5">
             <h4 className="text-white font-bold">{session?.user.name}</h4>
-            <p className="text-gray-500">{session?.user.email}</p>
+            <p className="text-gray-500">
+              {session?.user.email.substring(0, emailAddress.indexOf("@"))}
+            </p>
           </div>
         </div>
         <DotsHorizontalIcon className="h-5 hidden xl:inline self-center ml-10 text-white"></DotsHorizontalIcon>
