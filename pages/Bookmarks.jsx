@@ -7,9 +7,12 @@ import styles from "../styles/Home.module.css";
 import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
-import Profile from "../components/Profile";
 
-export default function profile({ trendingResults, followResults, providers }) {
+export default function Bookmarks({
+  trendingResults,
+  followResults,
+  providers,
+}) {
   // we will use a hook to get the session
 
   const { data: session } = useSession();
@@ -30,10 +33,9 @@ export default function profile({ trendingResults, followResults, providers }) {
         {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
         <Sidebar></Sidebar>
         {/* Sidebar */}
-        <Profile></Profile>
+        <Feed input={false} page={"Bookmarks"}></Feed>
         {/* Feed */}
         <Widgets
-          userMedia={true}
           trendingResults={trendingResults}
           followResults={followResults}
         ></Widgets>

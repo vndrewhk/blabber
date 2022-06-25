@@ -9,7 +9,7 @@ import Login from "../components/Login";
 import Modal from "../components/Modal";
 import NotificationFeed from "../components/NotificationFeed";
 
-export default function notifications({
+export default function Notifications({
   trendingResults,
   followResults,
   providers,

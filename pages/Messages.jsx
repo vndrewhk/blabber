@@ -8,7 +8,7 @@ import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
 
-export default function messages({
+export default function Messages({
   trendingResults,
   followResults,
   providers,
