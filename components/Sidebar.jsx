@@ -85,7 +85,7 @@ function Sidebar() {
           <div className="hidden xl:inline leading-5">
             <h4 className="text-white font-bold">{session?.user.name}</h4>
             <p className="text-gray-500">
-              {session?.user.email.substring(0, emailAddress.indexOf("@"))}
+              {session?.user.email.substring(0, email.indexOf("@"))}
             </p>
           </div>
         </div>
