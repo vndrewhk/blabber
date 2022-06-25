@@ -8,25 +8,28 @@ function NotificationFeed() {
   // followed,like,commentlike,retweet,reply
 
   const [notifications, setNotifications] = useState([
-    { user: "Jack Dorsey", type: "followed", userImg: Jack.src },
+    { user: "Jack Dorsey", type: "followed", userImg: Jack.src, key: "1" },
     {
       type: "like",
       user: "Andrew Ma",
       userImg: "https://rb.gy/ogau5a",
       text: "This is a really cool website.",
       image: Cat.src,
+      key: "2",
     },
     {
       user: "Andrew Ma",
       type: "retweet",
       userImg: "https://rb.gy/ogau5a",
       text: "I love getting notifications!",
+      key: "3",
     },
     {
       type: "commentlike",
       user: "Drake",
       userImg: Drake.src,
       text: "I hope Drake wins another award soon!",
+      key: "4",
     },
   ]);
 
@@ -47,7 +50,12 @@ function NotificationFeed() {
         <div className="pb-72">
           {notifications.length > 0 &&
             notifications.map((notification) => {
-              return <Notification notification={notification}></Notification>;
+              return (
+                <Notification
+                  key={notification.key}
+                  notification={notification}
+                ></Notification>
+              );
             })}
         </div>
       </>
