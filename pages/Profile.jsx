@@ -14,9 +14,9 @@ export default function Profile({ trendingResults, followResults, providers }) {
 
   const { data: session } = useSession();
 
-  // if (!session) {
-  //   return <Login providers={providers} />;
-  // }
+  if (!session) {
+    return <Login providers={providers} />;
+  }
 
   return (
     <div>
