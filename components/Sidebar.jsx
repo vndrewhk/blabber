@@ -15,20 +15,19 @@ import {
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { modalTrue, inputTrue, toggleModal } from "../store/modalSlice";
 
 function Sidebar() {
   const { data: session } = useSession();
   const router = useRouter();
-  // const emailTrim = (email) => {
-  //   let newEmail = "";
-  //   for (let i = 0; i < email.length; i++) {
-  //     if (email[i] == "@") {
-  //       break;
-  //     }
-  //     newEmail += email[i];
-  //   }
-  //   return newEmail;
-  // };
+  const modalState = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+  const modalChange = () => {
+    dispatch(modalTrue());
+    dispatch(inputTrue());
+  };
+
   return (
     // we want to keep sidebar fixed because we dont want it to scroll when we scroll the feed through
 
@@ -67,7 +66,10 @@ function Sidebar() {
         /> */}
       </div>
       {/* w-56 h-[52px] */}
-      <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px]  text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
+      <button
+        onClick={modalChange}
+        className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px]  text-lg font-bold shadow-md hover:bg-[#1a8cd8]"
+      >
         Tweet
       </button>
       {/* flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24 */}
@@ -92,7 +94,8 @@ function Sidebar() {
             </p>
           </div>
         </div>
-        <DotsHorizontalIcon className="h-5 hidden xl:inline self-center ml-10 text-white"></DotsHorizontalIcon>
+        <b className="text-sm">Logout</b>
+        {/* <DotsHorizontalIcon className="h-5 hidden xl:inline self-center ml-10 text-white"></DotsHorizontalIcon> */}
       </div>
     </div>
   );

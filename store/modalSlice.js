@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   modalStatus: false,
+  input: false,
 };
 
 const modalSlice = createSlice({
@@ -17,9 +18,16 @@ const modalSlice = createSlice({
     modalFalse: (state) => {
       state.modalStatus = false;
     },
+    inputTrue: (state) => {
+      state.input = true;
+    },
+    inputFalse: (state) => {
+      state.input = false;
+    },
   },
 });
 
-export const { toggleModal, modalTrue, modalFalse } = modalSlice.actions;
+export const { toggleModal, modalTrue, modalFalse, inputTrue, inputFalse } =
+  modalSlice.actions;
 
 export default modalSlice.reducer;

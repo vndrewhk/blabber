@@ -17,6 +17,9 @@ import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import React, { useState, useRef } from "react";
 import { db, storage } from "../firebase";
 import { useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+import { inputFalse, toggleModal } from "../store/modalSlice";
+
 // import EmojiPicker from "./EmojiPicker";
 function Input() {
   const { data: session } = useSession();
@@ -26,6 +29,8 @@ function Input() {
   // "https://c.tenor.com/IVQgkTbHZhYAAAAd/spinning-monkey-spinning-ape.gif"
   const [showEmojis, setShowEmojis] = useState(false);
   const filePickerRef = useRef(null);
+  const dispatch = useDispatch();
+  const modalState = useSelector((state) => state.modal);
 
   const handleInput = (e) => {
     SetInput(e.target.value);
@@ -43,7 +48,9 @@ function Input() {
     };
     e.target.value = "";
   };
-
+  const setInputFalse = () => {
+    dispatch(inputFalse());
+  };
   const deleteImage = () => {
     setFile(null);
   };
@@ -83,6 +90,7 @@ function Input() {
     setLoading(false);
     SetInput("");
     setFile(null);
+    setInputFalse();
   };
 
   //   const addEmoji = (e) => {

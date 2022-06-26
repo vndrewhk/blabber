@@ -32,7 +32,7 @@ import { db } from "../firebase";
 import { modalTrue, toggleModal } from "../store/modalSlice";
 import { setPostId } from "../store/postSlice";
 
-function Post({ postInfo, id, postPage }) {
+function SamplePost({ postInfo, id, postPage }) {
   const modalState = useSelector((state) => state.modal);
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(modalState);
@@ -79,7 +79,6 @@ function Post({ postInfo, id, postPage }) {
   const likePost = async () => {
     if (liked) {
       await deleteDoc(doc(db, "posts", id, "likes", session?.user.uid));
-      //                 deleteDoc(doc(db, "posts", id));
       setLiked(false);
     } else {
       await setDoc(doc(db, "posts", id, "likes", session?.user.uid), {
@@ -87,41 +86,18 @@ function Post({ postInfo, id, postPage }) {
       });
     }
   };
-
-  //   const likePost = async () => {
-  //     if (liked) {
-  //       await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
-  //     } else {
-  //       await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
-  //         email: session.user.email,
-  //       });
-  //     }
-  //   };
-
-  console.log(postInfo);
-  console.log(postInfo.timestamp);
-  // console.log(id);
-
   useEffect(
     () =>
       setLiked(
         likes.findIndex((like) => like.id === session?.user?.uid) !== -1
       ),
-
-    //why does return not work here?
-    // its because findindex already returns something, you just need to check if that returns is !==-1
-    // setLiked(
-    //   likes.findIndex((like) => {
-    //     return (like.id === session?.user?.uid) !== -1;
-    //   })
-    // ),
     [likes]
   );
 
   return (
     <div
       className="p-3 flex cursor-pointer border-b border-gray-700"
-      onClick={() => router.push(`/${id}`)}
+    //   onClick={() => router.push(`/${id}`)}
     >
       {/* if not postpage */}
       {!postPage && (
@@ -158,7 +134,8 @@ function Post({ postInfo, id, postPage }) {
               </span>{" "}
               ·{" "}
               <span className="hover:underline text-sm sm:text-[15px]">
-                <Moment fromNow>{postInfo?.timestamp?.toDate()}</Moment>
+                {/* <Moment fromNow>{postInfo?.timestamp?.toDate()}</Moment> */}
+                {postInfo.timestamp}
               </span>{" "}
               {!postPage && (
                 <p className="sm:text-base text-[15px] text-[#d9d9d9] mt-0.5">
@@ -188,15 +165,15 @@ function Post({ postInfo, id, postPage }) {
         >
           <div
             className="flex items-center space-x-1 group"
-            onClick={(e) => {
-              // stopPropagation prevents other div onClicks from being triggered
-              e.stopPropagation();
-              //   setPostId(id);
-              //   setIsOpen(true);
-              modalChange();
-              postIdChange();
-              //   console.log("hi");
-            }}
+            // onClick={(e) => {
+            //   // stopPropagation prevents other div onClicks from being triggered
+            //   e.stopPropagation();
+            //   //   setPostId(id);
+            //   //   setIsOpen(true);
+            //   modalChange();
+            //   postIdChange();
+            //   //   console.log("hi");
+            // }}
           >
             <div className="icon group-hover:bg-[#1d9bf0] group-hover:bg-opacity-10">
               <ChatIcon className="h-5 group-hover:text-[#1d9bf0]" />
@@ -211,11 +188,11 @@ function Post({ postInfo, id, postPage }) {
           {session?.user.uid === postInfo?.id ? (
             <div
               className="flex items-center space-x-1 group"
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteDoc(doc(db, "posts", id));
-                router.push("/");
-              }}
+            //   onClick={(e) => {
+            //     e.stopPropagation();
+            //     deleteDoc(doc(db, "posts", id));
+            //     router.push("/");
+            //   }}
             >
               <div className="icon group-hover:bg-red-600/10">
                 <TrashIcon className="h-5 group-hover:text-red-600" />
@@ -231,10 +208,10 @@ function Post({ postInfo, id, postPage }) {
 
           <div
             className="flex items-center space-x-1 group"
-            onClick={(e) => {
-              e.stopPropagation();
-              likePost();
-            }}
+            // onClick={(e) => {
+            //   e.stopPropagation();
+            //   likePost();
+            // }}
           >
             <div className="icon group-hover:bg-pink-600/10">
               {liked ? (
@@ -266,4 +243,4 @@ function Post({ postInfo, id, postPage }) {
   );
 }
 
-export default Post;
+export default SamplePost;

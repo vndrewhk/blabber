@@ -17,9 +17,9 @@ export default function Bookmarks({
 
   const { data: session } = useSession();
 
-  // if (!session) {
-  //   return <Login providers={providers} />;
-  // }
+  if (!session) {
+    return <Login providers={providers} />;
+  }
 
   return (
     <div>
