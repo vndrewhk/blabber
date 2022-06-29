@@ -127,6 +127,7 @@ function Sidebar(props) {
       {/* flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24 */}
 
       <div
+        title="Logout"
         onClick={() => signOut()}
         className="text-[#d9d9d9] flex items-center ml:auto mt-auto hoverAnimation xl:ml-auto justify-between xl:w-56 xl:h-[52px]  "
       >
