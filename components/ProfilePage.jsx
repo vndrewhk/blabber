@@ -14,7 +14,9 @@ function Profile(props) {
       text: "This is a sample profile post! Unfortunately, interactivity is limited here. Please go to the home page for full usage!",
       timestamp: "4 days ago",
       // timestamp: at {seconds: 1655754835, nanoseconds: 580000000}
-      userImg: session?.user.image,
+      userImg: session?.user.image
+        ? session.user.image
+        : "https://rb.gy/ogau5a",
       username: session?.user.name,
     },
     {
@@ -24,7 +26,9 @@ function Profile(props) {
       text: "",
       timestamp: "4 days ago",
       // timestamp: at {seconds: 1655754835, nanoseconds: 580000000}
-      userImg: session?.user.image,
+      userImg: session?.user.image
+        ? session.user.image
+        : "https://rb.gy/ogau5a",
       username: session?.user.name,
     },
     {
@@ -33,7 +37,9 @@ function Profile(props) {
       text: "This page is under development.",
       timestamp: "6 days ago",
       // timestamp: at {seconds: 1655754835, nanoseconds: 580000000}
-      userImg: session?.user.image,
+      userImg: session?.user.image
+        ? session.user.image
+        : "https://rb.gy/ogau5a",
       username: session?.user.name,
     },
   ];
@@ -62,7 +68,10 @@ function Profile(props) {
         ></img>
         <div className="ml-[25px] pb-[70px] ">
           <img
-            src="https://media1.popsugar-assets.com/files/thumbor/zan-t_Me63if8oqWYE9ENiPLlhA/0x224:2826x3050/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/02/11/894/n/1922398/87f6bb525e430e7bd44e40.22278576_/i/Drake.jpg"
+            //  src="https://rb.gy/ogau5a"
+            src={
+              session?.user.image ? session.user.image : "https://rb.gy/ogau5a"
+            }
             alt="Profile Picture"
             className="border-black border-4 w-[130px] h-[130px] rounded-full ml-[25px] xl:ml-[2.5px] xl:mr-5 z-40 top-[180px] absolute"
           ></img>
@@ -70,7 +79,11 @@ function Profile(props) {
         <div className="relative pl-5 pb-5 border-b-[1px] border-gray-700">
           <p className="text-xl font-bold">{session?.user.name}</p>
           <p className="text-[#6e767d]">{session?.user.email}</p>
-          <p className="mt-2">Biography</p>
+          <p className="mt-2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non
+            ultrices arcu. Fusce vel quam eget justo rhoncus tincidunt quis sed
+            nibh. Morbi quis aliquam ipsum.
+          </p>
           <div className="mt-2 flex w-full">
             <p className="text-white mr-5">
               711 <span className="text-[#6e767d]">following</span>

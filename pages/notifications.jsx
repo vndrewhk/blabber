@@ -8,6 +8,7 @@ import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
 import NotificationFeed from "../components/NotificationFeed";
+import { useRouter } from "next/router";
 
 export default function Notifications({
   trendingResults,
@@ -17,7 +18,7 @@ export default function Notifications({
   // we will use a hook to get the session
 
   const { data: session } = useSession();
-
+  const router = useRouter();
   if (!session) {
     return <Login providers={providers} />;
   }
@@ -32,7 +33,7 @@ export default function Notifications({
       <main className="flex bg-black min-h-screen max-w-[1500px]  mx-auto">
         {/* <main> */}
         {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
-        <Sidebar></Sidebar>
+        <Sidebar pathname={router.pathname} notHome={true}></Sidebar>
         {/* Sidebar */}
         <NotificationFeed></NotificationFeed> {/* Feed */}
         <Widgets

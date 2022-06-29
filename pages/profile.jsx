@@ -8,12 +8,13 @@ import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
 import ProfilePage from "../components/ProfilePage";
+import { useRouter } from "next/router";
 
 export default function Profile({ trendingResults, followResults, providers }) {
   // we will use a hook to get the session
 
   const { data: session } = useSession();
-
+  const router = useRouter();
   if (!session) {
     return <Login providers={providers} />;
   }
@@ -28,7 +29,7 @@ export default function Profile({ trendingResults, followResults, providers }) {
       <main className="flex bg-black min-h-screen max-w-[1500px]  mx-auto">
         {/* <main> */}
         {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
-        <Sidebar></Sidebar>
+        <Sidebar pathname={router.pathname} notHome={true}></Sidebar>
         {/* Sidebar */}
         <ProfilePage></ProfilePage>
         {/* Feed */}

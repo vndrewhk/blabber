@@ -1,8 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import SidebarLink from "./SidebarLink";
-import { HomeIcon } from "@heroicons/react/solid";
 import {
+  HomeIcon as HomeIconSolid,
+  BellIcon as BellIconSolid,
+  InboxIcon as InboxIconSolid,
+  BookmarkIcon as BookmarkIconSolid,
+  UserIcon as UserIconSolid,
+  LogoutIcon,
+} from "@heroicons/react/solid";
+
+import {
+  HomeIcon,
   HashtagIcon,
   BellIcon,
   InboxIcon,
@@ -18,7 +27,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { modalTrue, inputTrue, toggleModal } from "../store/modalSlice";
 
-function Sidebar() {
+function Sidebar(props) {
   const { data: session } = useSession();
   const router = useRouter();
   const modalState = useSelector((state) => state.modal);
@@ -44,21 +53,52 @@ function Sidebar() {
         ></Image>
       </div>
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
-        <SidebarLink text="Home" Icon={HomeIcon} active routeTo="/" />
+        <SidebarLink
+          text="Home"
+          Icon={
+            props.pathname != "/notifications" &&
+            props.pathname != "/messages" &&
+            props.pathname != "/bookmarks" &&
+            props.pathname != "/profile"
+              ? HomeIconSolid
+              : HomeIcon
+          }
+          routeTo="/"
+          active={
+            props.pathname != "/notifications" &&
+            props.pathname != "/messages" &&
+            props.pathname != "/bookmarks" &&
+            props.pathname != "/profile"
+          }
+        />
         {/* <SidebarLink text="Explore" Icon={HashtagIcon} routeTo="/explore" /> */}
         <SidebarLink
           text="Notifications"
-          Icon={BellIcon}
+          Icon={props.pathname == "/notifications" ? BellIconSolid : BellIcon}
           routeTo="/notifications"
+          active={props.pathname == "/notifications"}
         />
-        <SidebarLink text="Messages" Icon={InboxIcon} routeTo="/messages" />
+        <SidebarLink
+          text="Messages"
+          Icon={props.pathname == "/messages" ? InboxIconSolid : InboxIcon}
+          routeTo="/messages"
+          active={props.pathname == "/messages"}
+        />
         <SidebarLink
           text="Bookmarks"
-          Icon={BookmarkIcon}
+          Icon={
+            props.pathname == "/bookmarks" ? BookmarkIconSolid : BookmarkIcon
+          }
           routeTo="/bookmarks"
+          active={props.pathname == "/bookmarks"}
         />
         {/* <SidebarLink text="Lists" Icon={ClipboardListIcon} routeTo="/lists" /> */}
-        <SidebarLink text="Profile" Icon={UserIcon} routeTo="/profile" />
+        <SidebarLink
+          text="Profile"
+          Icon={props.pathname == "/profile" ? UserIconSolid : UserIcon}
+          routeTo="/profile"
+          active={props.pathname == "/profile"}
+        />
         {/* <SidebarLink
           text="More"
           Icon={DotsCircleHorizontalIcon}
@@ -66,12 +106,24 @@ function Sidebar() {
         /> */}
       </div>
       {/* w-56 h-[52px] */}
-      <button
-        onClick={modalChange}
-        className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px]  text-lg font-bold shadow-md hover:bg-[#1a8cd8]"
-      >
-        Tweet
-      </button>
+      {!props.notHome && (
+        <button
+          onClick={modalChange}
+          className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px]  text-lg font-bold shadow-md hover:bg-[#1a8cd8]"
+        >
+          Tweet
+        </button>
+      )}
+      {props.notHome && (
+        <button
+          onClick={() => {
+            router.push("/");
+          }}
+          className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px]  text-lg font-bold shadow-md hover:bg-[#1a8cd8]"
+        >
+          Tweet
+        </button>
+      )}
       {/* flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24 */}
 
       <div
@@ -94,7 +146,9 @@ function Sidebar() {
             </p>
           </div>
         </div>
-        <b className="text-sm">Logout</b>
+        <b className="text-sm">
+          <LogoutIcon className="text-white h-5"></LogoutIcon>
+        </b>
         {/* <DotsHorizontalIcon className="h-5 hidden xl:inline self-center ml-10 text-white"></DotsHorizontalIcon> */}
       </div>
     </div>

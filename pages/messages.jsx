@@ -2,11 +2,14 @@ import Head from "next/head";
 import Image from "next/image";
 import Feed from "../components/Feed";
 import Sidebar from "../components/Sidebar";
+import MessageTab from "../components/MessageTab";
+
 import Widgets from "../components/Widgets";
 import styles from "../styles/Home.module.css";
 import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
+import { useRouter } from "next/router";
 
 export default function Messages({
   trendingResults,
@@ -16,7 +19,7 @@ export default function Messages({
   // we will use a hook to get the session
 
   const { data: session } = useSession();
-
+  const router = useRouter();
   if (!session) {
     return <Login providers={providers} />;
   }
@@ -31,14 +34,15 @@ export default function Messages({
       <main className="flex bg-black min-h-screen max-w-[1500px]  mx-auto">
         {/* <main> */}
         {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
-        <Sidebar></Sidebar>
+        <Sidebar pathname={router.pathname} notHome={true}></Sidebar>
         {/* Sidebar */}
-        <Feed page={"Messages"}></Feed>
+        {/* <Feed page={"Messages"}></Feed> */}
         {/* Feed */}
-        <Widgets
+        {/* <Widgets
           trendingResults={trendingResults}
           followResults={followResults}
-        ></Widgets>
+        ></Widgets> */}
+        <MessageTab></MessageTab>
         {/* Widgets */}
         <Modal></Modal>
         {/* Modal <- Redux/recoil */}

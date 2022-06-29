@@ -12,8 +12,8 @@ function Feed(props) {
 
     <div className="text-white flex-grow border-l border-r border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px] bg-black">
       {/* // whenever we use fixed or sticky, we have to define a height value. top value */}
-      <div className=" bg-black text-[#d9d9d9]  flex items-center sm:justify-between py-2 px-3 sticky top-0 border-b border-gray-700 z-50">
-        <h1 className="text-lg sm:text-xl font-bold">{props.page}</h1>
+      <div className=" bg-black  opacity-90  text-[#d9d9d9] backdrop-blur-[20px] backdrop-saturate-180 flex items-center sm:justify-between py-2 px-3 sticky top-0 border-b border-gray-700 z-50">
+        <h1 className="text-lg sm:text-xl font-bold ">{props.page}</h1>
         <div className="hoverAnimation cursor-pointer w-9 h-9 justify-center items-center flex xl:px-0 ml-auto">
           <SparklesIcon className="h-5 text-white "></SparklesIcon>
         </div>

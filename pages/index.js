@@ -27,7 +27,7 @@ export default function Home({ trendingResults, followResults, providers }) {
       <main className="flex bg-black min-h-screen max-w-[1500px]  mx-auto">
         {/* <main> */}
         {/* sidebar is fixed, therefore feed appears to the left of sidebar, we have to set feed to relative */}
-        <Sidebar></Sidebar>
+        <Sidebar notHome={false}></Sidebar>
         {/* Sidebar */}
         <Feed page={"Home"} input={true}></Feed>
         {/* Feed */}
