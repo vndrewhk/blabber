@@ -92,7 +92,7 @@ function MessageTab() {
         <div
           className={`${focused && "hidden"}  ${
             !focused && "flex"
-          } md:flex  text-[#d9d9d9] border-r border-gray-700 md:col md:flex-col md:w-[32%] max-h-full`}
+          } md:flex  text-[#d9d9d9] border-r border-gray-700 md:col md:flex-col md:w-[20vw] max-h-full`}
         >
           <div className="flex px-1.5 py-2 text-[#d9d9d9] font-semibold text-xl gap-4 sticky top-0 z-50 ml-2">
             <h1 className="text-lg sm:text-xl font-bold cursor-pointer">
@@ -120,7 +120,7 @@ function MessageTab() {
         </div>
         {/* if a message not selected */}
         {!focused && (
-          <div className="flex-nowrap  text-[#d9d9d9] border-r  border-gray-700 flex flex-col    w-[100%] md:w-[53%] ">
+          <div className="flex-nowrap  text-[#d9d9d9] border-r  border-gray-700 flex flex-col    w-[100vw] md:w-[40vw] ">
             <div className="flex px-1.5 py-2 border-b border-gray-700 text-[#d9d9d9] font-semibold text-xl gap-4 sticky top-0 z-50">
               <div className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0">
                 <ArrowLeftIcon
@@ -141,8 +141,8 @@ function MessageTab() {
         )}
         {/* message selectedI */}
         {focused && (
-          <div className=" flex-nowrap  text-[#d9d9d9] border-r  border-gray-700 flex flex-col w-[100%] md:w-[53%] max-h-full">
-            <div className=" flex px-1.5 py-2 border-b border-gray-700 text-[#d9d9d9] font-semibold text-xl gap-4 sticky top-0 z-50">
+          <div className=" flex-nowrap  text-[#d9d9d9] border-r  border-gray-700 flex flex-col w-[100vw] md:w-[40vw] max-h-full">
+            <div className=" flex px-1.5 py-2 border-b bg-black border-gray-700 text-[#d9d9d9] font-semibold text-xl gap-4 sticky top-0 z-50">
               <div className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0">
                 <ArrowLeftIcon
                   className="text-white h-5 cursor-pointer"
