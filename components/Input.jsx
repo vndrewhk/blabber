@@ -103,7 +103,7 @@ function Input() {
   return (
     //   space-x-3 means spacing between the children
     <div
-      className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll`}
+      className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-auto`}
     >
       <img
         src={session?.user.image}

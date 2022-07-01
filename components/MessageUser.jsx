@@ -32,9 +32,9 @@ function MessageUser({ user, focused, onClick }) {
           alt="Profile Picture"
         ></img>
       )}
-      <div className="flex flex-col max-w-[70%] overflow-scroll whitespace-nowrap text-sm text-[#d9d9d9]">
+      <div className="flex flex-col max-w-[70%] overflow-hidden whitespace-nowrap text-sm text-[#d9d9d9]">
         <div>{user.recipient}</div>
-        <div className="overflow-scroll whitespace-nowrap text-sm text-gray-500">
+        <div className="overflow-hidden whitespace-nowrap text-sm text-gray-500">
           {user.messages[user.messages.length - 1].text}
         </div>
       </div>
