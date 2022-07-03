@@ -87,7 +87,7 @@ function MessageTab() {
   };
 
   return (
-    <div className="text-white flex-row flex-grow border-l  border-gray-700 sm:ml-[73px] xl:ml-[370px] bg-black max-h-full ">
+    <div className="text-white flex-row flex-grow border-l  border-gray-700 sm:ml-[73px] xl:ml-[370px] bg-black max-h-[100vh] ">
       <div className="flex w-full h-full max-h-full">
         <div
           className={`${focused && "hidden"}  ${
@@ -109,14 +109,16 @@ function MessageTab() {
               ></input>
             </div>
           </div>
-          {messageList.map((user) => (
-            <MessageUser
-              onClick={selectUser.bind(null, user.id)}
-              key={user.id}
-              user={user}
-              focused={focused == user.id}
-            ></MessageUser>
-          ))}
+          <div className="max-h-full">
+            {messageList.map((user) => (
+              <MessageUser
+                onClick={selectUser.bind(null, user.id)}
+                key={user.id}
+                user={user}
+                focused={focused == user.id}
+              ></MessageUser>
+            ))}
+          </div>
         </div>
         {/* if a message not selected */}
         {!focused && (
@@ -141,7 +143,7 @@ function MessageTab() {
         )}
         {/* message selectedI */}
         {focused && (
-          <div className=" flex-nowrap  text-[#d9d9d9] border-r  border-gray-700 flex flex-col w-[100vw] md:w-[40vw] max-h-full">
+          <div className=" flex-nowrap  text-[#d9d9d9] border-r  border-gray-700 flex flex-col w-[100vw] md:w-[40vw] max-h-full overflow-y-scroll">
             <div className=" flex px-1.5 py-2 border-b bg-black border-gray-700 text-[#d9d9d9] font-semibold text-xl gap-4 sticky top-0 z-50">
               <div className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0">
                 <ArrowLeftIcon
@@ -152,7 +154,7 @@ function MessageTab() {
               {selectedUser.recipient}
               {/* <span className="text-white"> text {id}</span> */}
             </div>
-            <div className="flex h-full flex-col w-full justify-end pb-5 max-h-full">
+            <div className="flex h-full flex-col w-full justify-end pb-5 max-h-[84vh]">
               {selectedUser.messages.map((message) => (
                 <MessagePost
                   key={message.text}
