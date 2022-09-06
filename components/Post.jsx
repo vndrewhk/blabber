@@ -179,7 +179,7 @@ function Post({ postInfo, id, postPage }) {
         <img
           src={postInfo?.image}
           alt=""
-          className="rounded-2xl max-h-[400px] object-cover mr-2"
+          className="rounded-2xl max-h-[400px] max-w-[400px] object-cover mr-2"
         ></img>
         <div
           className={`text-[#6e767d] flex flex-row justify-between w-10/12 ${
