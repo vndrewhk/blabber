@@ -133,7 +133,7 @@ function Post({ postInfo, id, postPage }) {
       )}
 
       {/* if postpage */}
-      <div className="flex flex-col space-y-2 w-full lg:pr-5">
+      <div className="flex flex-col space-y-2 w-full  lg:pr-10">
         <div className={`flex ${!postPage && "justify-between"}`}>
           {postPage && (
             <img
@@ -179,7 +179,7 @@ function Post({ postInfo, id, postPage }) {
         <img
           src={postInfo?.image}
           alt=""
-          className="rounded-2xl  max-w-[500px] object-contain"
+          className="rounded-2xl  max-w-[500px] object-contain mr-2"
         ></img>
         <div
           className={`text-[#6e767d] flex flex-row justify-between w-10/12 ${
