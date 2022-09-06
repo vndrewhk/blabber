@@ -31,10 +31,10 @@ export default function Home({ trendingResults, followResults, providers }) {
         {/* Sidebar */}
         <Feed page={"Home"} input={true}></Feed>
         {/* Feed */}
-        {/* <Widgets
+        <Widgets
           trendingResults={trendingResults}
           followResults={followResults}
-        ></Widgets> */}
+        ></Widgets>
         {/* Widgets */}
         <Modal></Modal>
         {/* Modal <- Redux/recoil */}
