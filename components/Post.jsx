@@ -133,7 +133,7 @@ function Post({ postInfo, id, postPage }) {
       )}
 
       {/* if postpage */}
-      <div className="flex flex-col space-y-2 w-full">
+      <div className="flex flex-col space-y-2 w-full lg:pr-5">
         <div className={`flex ${!postPage && "justify-between"}`}>
           {postPage && (
             <img
